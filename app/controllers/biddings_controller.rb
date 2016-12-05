@@ -6,10 +6,19 @@ class BiddingsController < ApplicationController
     @bidding=Bidding.new(bidding_params)
     @bidding.user=current_user
     @bidding.auction=@auction
-    if @bidding.save
+
+    bidding_price=bidding_params[:price]
+
+    if @auction.price<bidding_price.to_i
+      @auction.price=bidding_price
+      @auction.save
+      @bidding.save
+      flash[:notice] = 'Thanks for your bidding.'
       redirect_to auction_path(auction_id)
     else
-      redirect_to root_path
+      flash[:alert] = 'Your bidding price should be higher than the recent price. '
+      redirect_to auction_path(auction_id)
+
 
     end
 

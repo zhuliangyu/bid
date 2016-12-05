@@ -36,12 +36,23 @@
 <% end %>
 
 <table class="table">
+  <thead>
+  <tr>
+    <td></td>
+    <td>Price</td>
+    <td>Time</td>
+    <td>User Name</td>
+  </tr>
+  </thead>
+
   <tbody>
+
   <% @biddings.each do |bidding| %>
       <tr>
         <td>Bidding:</td>
         <td><%= bidding.price %></td>
         <td><%= bidding.created_at %></td>
+        <td><%= bidding.user.name %></td>
       </tr>
   <% end %>
 
