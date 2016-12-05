@@ -33,6 +33,8 @@ gem 'aasm', '~> 4.11'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
+gem 'jquery-ui-rails'
+
 
 
 

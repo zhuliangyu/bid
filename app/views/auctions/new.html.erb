@@ -1,10 +1,17 @@
 <h1>Auctions#new</h1>
 
-<%= simple_form_for @auction do |f|%>
+<%= simple_form_for @auction do |f| %>
     <%= f.input :title %>
     <%= f.input :detail %>
-    <%= f.input :endon %>
     <%= f.input :price %>
+    <%= f.input :endon, as: :string, input_html: {class: 'datepicker', 'data-provide':'datepicker'} %>
     <%= f.button :submit %>
 
-<%end  %>
+<% end %>
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+    $('.datepicker').datepicker();
+</script>

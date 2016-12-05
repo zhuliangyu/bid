@@ -18,7 +18,7 @@ class AuctionsController < ApplicationController
   end
 
   def index
-    @auctions=Auction.all
+    @auctions=Auction.order("created_at DESC")
 
 
   end
