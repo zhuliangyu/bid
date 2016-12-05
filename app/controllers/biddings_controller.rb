@@ -1,4 +1,7 @@
 class BiddingsController < ApplicationController
+  before_action :user_authentication, only: :create
+
+
   def create
 
     auction_id=params[:auction_id]
@@ -6,12 +9,25 @@ class BiddingsController < ApplicationController
     @current_bidding=Bidding.new(bidding_params)
     @current_bidding.user=current_user
     @current_bidding.auction=@auction
-    previous_bidding=@auction.biddings.last.price
+
+    # default value for previous bidding in case there is no bidding
+    previous_bidding=0
+    previous_bidding=@auction.biddings.last.price if @auction.biddings.last
     bidding_price=bidding_params[:price]
 
-    if @current_bidding.price.to_i>previous_bidding.to_i
+    if @current_bidding.price.to_i >= previous_bidding.to_i
       @current_bidding.price=bidding_price
       @current_bidding.save
+
+      if @current_bidding.price.to_i >=@auction.price.to_i
+        @auction.above_reserve_price
+        @auction.save
+      else
+        @auction.below_reserve_price
+        @auction.save
+
+      end
+
       flash[:notice] = 'Thanks for your bidding.'
       redirect_to auction_path(auction_id)
     else

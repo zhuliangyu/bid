@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
+  def user_authentication
+
+    redirect_to root_path, alert: "Please sign in first." unless user_sign_in?
+  end
 
 
   private
@@ -10,6 +14,7 @@ class ApplicationController < ActionController::Base
     session[:user_id] ? true : false
 
   end
+
   helper_method :user_sign_in?
 
   def current_user

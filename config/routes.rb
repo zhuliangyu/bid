@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
   root to: 'home#index'
 
 
@@ -9,6 +8,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :auctions, only: [:new, :create, :index, :show] do
     resources :biddings, only: [:new, :create], shallow: :true
+
+    resources :publishings, only: [:create]
 
 
   end

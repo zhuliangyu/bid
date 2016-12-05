@@ -10,25 +10,34 @@
 
 <ul>
   <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'List of Auctions', auctions_path %></li>
+
   <% unless user_sign_in? %>
       <li><%= link_to 'Sign up', new_user_path %></li>
       <li><%= link_to 'Sign in', new_session_path %></li>
 
-  <% end %>
+<% end %>
+
+
+
   <% if user_sign_in? %>
       <li><%= link_to 'Sign out', session_path(current_user), method: :delete %></li>
       <li><%= link_to 'New Auction', new_auction_path %></li>
-      <li><%= link_to 'List of Auctions', auctions_path %></li>
   <% end %>
 </ul>
 
 <body>
-<% if flash[:notice] %>
-    <%= flash[:notice] %>
-<% else %>
-    <%= flash[:alert] %>
 
-<% end %>
+<div class="alert alert-info">
+  <% if flash[:notice] %>
+      <%= flash[:notice] %>
+  <% else %>
+      <%= flash[:alert] %>
+
+  <% end %>
+
+</div>
+
 
 <%= yield %>
 </body>
