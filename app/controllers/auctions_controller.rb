@@ -25,7 +25,7 @@ class AuctionsController < ApplicationController
 
   def show
     @auction=Auction.find(params[:id])
-    @bidding=Bidding.new
+    @current_bidding=Bidding.new
 
     @biddings=Bidding.order("Created_at DESC")
 

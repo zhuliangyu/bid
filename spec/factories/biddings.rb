@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :bidding do
+  factory :current_bidding do
     price 1
     user nil
     auction nil

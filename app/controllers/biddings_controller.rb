@@ -3,16 +3,15 @@ class BiddingsController < ApplicationController
 
     auction_id=params[:auction_id]
     @auction=Auction.find(auction_id)
-    @bidding=Bidding.new(bidding_params)
-    @bidding.user=current_user
-    @bidding.auction=@auction
-
+    @current_bidding=Bidding.new(bidding_params)
+    @current_bidding.user=current_user
+    @current_bidding.auction=@auction
+    previous_bidding=@auction.biddings.last.price
     bidding_price=bidding_params[:price]
 
-    if @auction.price<bidding_price.to_i
-      @auction.price=bidding_price
-      @auction.save
-      @bidding.save
+    if @current_bidding.price.to_i>previous_bidding.to_i
+      @current_bidding.price=bidding_price
+      @current_bidding.save
       flash[:notice] = 'Thanks for your bidding.'
       redirect_to auction_path(auction_id)
     else

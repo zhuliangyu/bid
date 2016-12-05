@@ -26,7 +26,7 @@
 
 </table>
 
-<%= simple_form_for [@auction, @bidding] do |f| %>
+<%= simple_form_for [@auction, @current_bidding] do |f| %>
 <%#= simple_form_for auction_bidding_index_path(@auction) do |f|%>
 
     <%= f.input :price %>
