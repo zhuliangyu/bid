@@ -27,15 +27,16 @@
   </tr>
 
 
-
   </tbody>
 
 
 </table>
 
-<div>
-  <%= link_to "Published",auction_publishings_path(@auction), method: :post  %>
-</div>
+<% if current_user && current_user.id==@auction.user.id %>
+    <div>
+      <%= link_to "Published", auction_publishings_path(@auction), method: :post %>
+    </div>
+<% end %>
 
 
 <%= simple_form_for [@auction, @current_bidding] do |f| %>
@@ -64,8 +65,8 @@
         <td>Bidding:</td>
         <td><%= bidding.price %></td>
         <td><%= bidding.created_at %></td>
-        <td><%= bidding.user.name %></td>
-        <td><%= bidding.user.name %></td>
+        <td> <%= link_to bidding.user.name, user_show_user_biddings_index_path(bidding.user) %></td>
+
       </tr>
   <% end %>
 

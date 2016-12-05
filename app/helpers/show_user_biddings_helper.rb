@@ -1,0 +1,2 @@
+module ShowUserBiddingsHelper
+end
