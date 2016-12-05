@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bid</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Bid</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <ul>
-    <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'Sign up', new_user_path %></li>
-  </ul>
+<ul>
+  <li><%= link_to 'Home', root_path %></li>
+  <% unless user_sign_in? %>
+      <li><%= link_to 'Sign up', new_user_path %></li>
+      <li><%= link_to 'Sign in', new_session_path %></li>
 
-  <body>
-    <%= yield %>
-  </body>
+<% end %>
+  <% if user_sign_in? %>
+      <li><%= link_to 'Sign out', session_path(current_user), method: :delete %></li>
+  <% end %>
+</ul>
+
+<body>
+<%= yield %>
+</body>
 </html>

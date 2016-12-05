@@ -1,3 +1,10 @@
 <h1>Home#index</h1>
-<h1>Welcome to my Bidding page</h1>
+
+<% if user_sign_in? %>
+    <h1>Hi, <%= current_user.name %>,welcome back.</h1>
+
+<% else %>
+    <h1>Welcome to my Bidding page, please login first!</h1>
+
+<% end %>
 <p>It is a index page</p>
