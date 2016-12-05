@@ -1,0 +1,30 @@
+<h1>Auctions#index</h1>
+<p>Find me in app/views/auctions/index.html.erb</p>
+
+<table class="table">
+  <tr>
+    <th>Title</th>
+    <th>Detail</th>
+    <th>Endon</th>
+    <th>Price</th>
+  </tr>
+
+  <% @auctions.each do |auction| %>
+      <tr>
+        <td><%= auction.title %></td>
+        <td><%= auction.detail %></td>
+        <td><%= auction.endon %></td>
+        <td><%= auction.price %></td>
+        <td><%= link_to "Go to",auction_path(auction) %></td>
+
+      </tr>
+
+
+  <% end %>
+
+</table>
+
+
+
+
+

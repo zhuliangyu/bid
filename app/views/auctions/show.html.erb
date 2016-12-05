@@ -1,0 +1,52 @@
+<h1>Auctions#show</h1>
+
+
+<table class="table">
+  <tbody>
+  <tr>
+    <td>Title</td>
+    <td><%= @auction.title %></td>
+  </tr>
+  <tr>
+    <td>Detail</td>
+    <td><%= @auction.detail %></td>
+  </tr>
+  <tr>
+    <td>Ends on</td>
+    <td><%= @auction.endon %></td>
+  </tr>
+  <tr>
+    <td>Price:</td>
+    <td><%= @auction.price %></td>
+  </tr>
+
+
+  </tbody>
+
+
+</table>
+
+<%= simple_form_for [@auction, @bidding] do |f| %>
+<%#= simple_form_for auction_bidding_index_path(@auction) do |f|%>
+
+    <%= f.input :price %>
+
+    <%= f.button :submit %>
+
+<% end %>
+
+<table class="table">
+  <tbody>
+  <% @biddings.each do |bidding| %>
+      <tr>
+        <td>Bidding:</td>
+        <td><%= bidding.price %></td>
+        <td><%= bidding.created_at %></td>
+      </tr>
+  <% end %>
+
+
+  </tbody>
+
+
+</table>

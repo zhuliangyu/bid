@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205174107) do
+ActiveRecord::Schema.define(version: 20161205185328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auctions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "detail"
+    t.datetime "endon"
+    t.integer  "price"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_auctions_on_user_id", using: :btree
+  end
+
+  create_table "biddings", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "user_id"
+    t.integer  "auction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_id"], name: "index_biddings_on_auction_id", using: :btree
+    t.index ["user_id"], name: "index_biddings_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -23,4 +44,7 @@ ActiveRecord::Schema.define(version: 20161205174107) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "auctions", "users"
+  add_foreign_key "biddings", "auctions"
+  add_foreign_key "biddings", "users"
 end
