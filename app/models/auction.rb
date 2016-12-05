@@ -1,8 +1,6 @@
 class Auction < ApplicationRecord
   include AASM
-
-
-    belongs_to :user
+  belongs_to :user
   has_many :biddings, dependent: :destroy
 
   aasm :whiny_transitions => false do
@@ -35,6 +33,7 @@ class Auction < ApplicationRecord
 
 
   end
+
 
 
 end

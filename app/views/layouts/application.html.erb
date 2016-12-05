@@ -23,6 +23,7 @@
   <% if user_sign_in? %>
       <li><%= link_to 'Sign out', session_path(current_user), method: :delete %></li>
       <li><%= link_to 'New Auction', new_auction_path %></li>
+      <li>Hello, <%= current_user.name %></li>
   <% end %>
 </ul>
 

@@ -1,6 +1,9 @@
 class BiddingsController < ApplicationController
   before_action :user_authentication, only: :create
 
+  before_action :user_not_bidding_self, only: :create
+
+
 
   def create
 
@@ -47,5 +50,17 @@ class BiddingsController < ApplicationController
   private
   def bidding_params
     params.require(:bidding).permit(:price)
+  end
+
+  def user_not_bidding_self
+    @auction=Auction.find(params[:auction_id])
+
+    if session[:user_id]==@auction.user.id
+      redirect_to auction_path(@auction),alert: 'You can not bid yourself'
+    end
+
+
+
+
   end
 end
