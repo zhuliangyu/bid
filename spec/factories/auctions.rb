@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :auction do
     title "MyString"
     detail "MyString"
-    endon "2016-12-05 10:49:34"
+    endon "12/05/2016"
     price 1
-    user nil
+    association :user, factory: :user
   end
 end

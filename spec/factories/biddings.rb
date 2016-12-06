@@ -1,7 +1,10 @@
 FactoryGirl.define do
-  factory :current_bidding do
+  factory :bidding do
     price 1
-    user nil
-    auction nil
+    association :user, factory: :user
+    association :auction, factory: :auction
   end
 end
+
+
+# FactoryGirl.build(:auction).valid?
