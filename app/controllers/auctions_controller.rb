@@ -29,7 +29,7 @@ class AuctionsController < ApplicationController
     @auction=Auction.find(params[:id])
     @current_bidding=Bidding.new
 
-    @biddings=Bidding.where(auction: @auction)
+    @biddings=Bidding.where(auction: @auction).order(created_at: :desc)
 
 
   end

@@ -1,4 +1,5 @@
 <h1>Auctions#show</h1>
+<input type="hidden" id="auction_id" value=<%= @auction.id %>>
 
 
 
@@ -48,6 +49,16 @@
 
 <% end %>
 
+
+<div class="well">
+  <p>It is a Ajax form to bid.</p>
+  <form action="#" method="post">
+    <input type="text" name="" id="ajax-submit-price">
+    <input type="submit" value="submit" id="ajax-form-submit">
+
+  </form>
+</div>
+
 <table class="table">
   <thead>
   <tr>
@@ -58,7 +69,7 @@
   </tr>
   </thead>
 
-  <tbody>
+  <tbody id="bidding-table">
 
   <% @biddings.each do |bidding| %>
       <tr>
@@ -66,7 +77,6 @@
         <td><%= bidding.price %></td>
         <td><%= bidding.created_at %></td>
         <td> <%= link_to bidding.user.name, user_show_user_biddings_index_path(bidding.user) %></td>
-
       </tr>
   <% end %>
 
@@ -75,3 +85,40 @@
 
 
 </table>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var DOMAIN = 'http://localhost:3000'
+
+    var id = $('#auction_id').val();
+
+    $('#ajax-form-submit').on('click', function (event) {
+        event.preventDefault();
+        price = $('#ajax-submit-price').val();
+        $.post({
+                url: DOMAIN + '/auctions/' + id + '/biddings.json',
+                data: {
+                    bidding: {price: price}
+
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+
+                    $('#bidding-table').hide().prepend('<tr><td>Bidding:</td><td>' + data.price + '</td><td>' + data.created_at + '</td> <td>' + data.user_id + '</td></tr>').fadeIn(1000);
+
+
+                },
+                error: function (data) {
+                    console.log(data)
+
+
+                }
+            }
+        );
+
+    });
+
+
+</script>
