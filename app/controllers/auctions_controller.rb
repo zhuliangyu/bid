@@ -1,5 +1,5 @@
 class AuctionsController < ApplicationController
-  before_action 'user_authentication', only: [:new,:create]
+  before_action :user_authentication, only: [:new,:create]
 
 
   def new
