@@ -104,15 +104,16 @@
                 },
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data)
+                    console.log(data);
 
-                    $('#bidding-table').hide().prepend('<tr><td>Bidding:</td><td>' + data.price + '</td><td>' + data.created_at + '</td> <td>' + data.user_id + '</td></tr>').fadeIn(1000);
+                     var bidding_node=$('<tr><td>Bidding:</td><td>' + data.price + '</td><td>' + data.created_at + '</td> <td>' + data.user_id + '</td></tr>').hide().fadeIn(1000);
+
+                    $('#bidding-table').prepend(bidding_node);
 
 
                 },
                 error: function (data) {
                     console.log(data)
-
 
                 }
             }
